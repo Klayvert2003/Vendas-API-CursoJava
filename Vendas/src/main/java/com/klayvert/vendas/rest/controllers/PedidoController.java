@@ -2,9 +2,9 @@ package com.klayvert.vendas.rest.controllers;
 
 import com.klayvert.vendas.rest.dtos.PedidoDTO;
 import com.klayvert.vendas.services.PedidoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public class PedidoController {
     }
 
     @PostMapping("/save")
-    public PedidoDTO save(@RequestBody @Validated PedidoDTO pedidoDTO){
+    public PedidoDTO save(@RequestBody @Valid PedidoDTO pedidoDTO){
         return this.pedidoService.save(pedidoDTO);
     }
 }
