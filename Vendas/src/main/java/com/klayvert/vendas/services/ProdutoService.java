@@ -4,6 +4,8 @@ import com.klayvert.vendas.domain.entities.Produto;
 import com.klayvert.vendas.domain.repository.ProdutoRepository;
 import com.klayvert.vendas.rest.dtos.ProdutoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,5 +44,14 @@ public class ProdutoService {
     public Produto findById(Long id){
         return this.produtoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+    }
+
+    public List<Produto> findByParam(Produto produto){
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnoreCase()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+
+        Example<Produto> example = Example.of(produto, matcher);
+        return this.produtoRepository.findAll(example);
     }
 }

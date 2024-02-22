@@ -1,5 +1,6 @@
 package com.klayvert.vendas.rest.controllers;
 
+import com.klayvert.vendas.domain.entities.ItemPedido;
 import com.klayvert.vendas.rest.dtos.ItemPedidoDTO;
 import com.klayvert.vendas.services.ItemPedidoService;
 import jakarta.validation.Valid;
@@ -24,6 +25,11 @@ public class ItemPedidoController {
     @GetMapping("/find_all")
     public List<ItemPedidoDTO> findAll(){
         return this.itemPedidoService.findAll();
+    }
+
+    @GetMapping("/find_by")
+    public List<ItemPedido> findByParam(ItemPedido param){
+        return this.itemPedidoService.findByParam(param);
     }
 
     @PostMapping("/save")

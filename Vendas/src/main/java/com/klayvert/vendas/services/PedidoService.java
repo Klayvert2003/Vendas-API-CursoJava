@@ -4,6 +4,8 @@ import com.klayvert.vendas.domain.entities.Pedido;
 import com.klayvert.vendas.domain.repository.PedidoRepository;
 import com.klayvert.vendas.rest.dtos.PedidoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,5 +45,14 @@ public class PedidoService {
     public Pedido findById(Long id){
         return this.pedidoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+    }
+
+    public List<Pedido> findByParam(Pedido pedido){
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnoreCase()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+
+        Example<Pedido> example = Example.of(pedido, matcher);
+        return this.pedidoRepository.findAll(example);
     }
 }

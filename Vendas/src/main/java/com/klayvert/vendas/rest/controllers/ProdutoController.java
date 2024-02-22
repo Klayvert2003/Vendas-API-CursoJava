@@ -1,6 +1,6 @@
 package com.klayvert.vendas.rest.controllers;
 
-import com.klayvert.vendas.rest.dtos.ClienteDTO;
+import com.klayvert.vendas.domain.entities.Produto;
 import com.klayvert.vendas.rest.dtos.ProdutoDTO;
 import com.klayvert.vendas.services.ProdutoService;
 import jakarta.validation.Valid;
@@ -25,6 +25,11 @@ public class ProdutoController {
     @GetMapping("/find_all")
     public List<ProdutoDTO> findAllProducts(){
         return this.produtoService.findAll();
+    }
+
+    @GetMapping("find_by")
+    public List<Produto> findByParam(Produto param){
+        return this.produtoService.findByParam(param);
     }
 
     @PostMapping("/save")
