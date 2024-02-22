@@ -23,16 +23,19 @@ public class ItemPedidoController {
     }
 
     @GetMapping("/find_all")
+    @ResponseStatus(HttpStatus.OK)
     public List<ItemPedidoDTO> findAll(){
         return this.itemPedidoService.findAll();
     }
 
     @GetMapping("/find_by")
+    @ResponseStatus(HttpStatus.OK)
     public List<ItemPedido> findByParam(ItemPedido param){
         return this.itemPedidoService.findByParam(param);
     }
 
     @PostMapping("/save")
+    @ResponseStatus(HttpStatus.CREATED)
     public ItemPedidoDTO save(@RequestBody @Valid ItemPedidoDTO itemPedidoDTO){
         return this.itemPedidoService.save(itemPedidoDTO);
     }
@@ -44,7 +47,7 @@ public class ItemPedidoController {
     }
 
     @PutMapping("/update")
-    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
     public ItemPedidoDTO update(@RequestBody @Valid ItemPedidoDTO itemPedidoDTO){
         return this.itemPedidoService.update(itemPedidoDTO);
     }

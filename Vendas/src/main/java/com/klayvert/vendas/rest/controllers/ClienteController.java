@@ -23,16 +23,19 @@ public class ClienteController {
     }
 
     @GetMapping("/find_all")
+    @ResponseStatus(HttpStatus.OK)
     public List<ClienteDTO> findAll(){
         return this.clienteService.findAll();
     }
 
     @GetMapping("/find_by")
+    @ResponseStatus(HttpStatus.OK)
     public List<Cliente> findByParam(Cliente param){
         return this.clienteService.findByParam(param);
     }
 
     @PostMapping("/save")
+    @ResponseStatus(HttpStatus.CREATED)
     public ClienteDTO save(@RequestBody @Valid ClienteDTO clienteDTO){
         return this.clienteService.save(clienteDTO);
     }
@@ -44,7 +47,8 @@ public class ClienteController {
     }
 
     @PutMapping("/update")
-    @ResponseBody ClienteDTO update(@RequestBody @Valid ClienteDTO clienteDTO){
+    @ResponseStatus(HttpStatus.OK)
+    public ClienteDTO update(@RequestBody @Valid ClienteDTO clienteDTO){
         return this.clienteService.save(clienteDTO);
     }
 }

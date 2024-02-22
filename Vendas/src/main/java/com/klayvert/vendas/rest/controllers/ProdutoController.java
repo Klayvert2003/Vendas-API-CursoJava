@@ -23,11 +23,13 @@ public class ProdutoController {
     }
 
     @GetMapping("/find_all")
+    @ResponseStatus(HttpStatus.OK)
     public List<ProdutoDTO> findAllProducts(){
         return this.produtoService.findAll();
     }
 
     @GetMapping("find_by")
+    @ResponseStatus(HttpStatus.OK)
     public List<Produto> findByParam(Produto param){
         return this.produtoService.findByParam(param);
     }
@@ -45,7 +47,7 @@ public class ProdutoController {
     }
 
     @PutMapping("/update")
-    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
     public ProdutoDTO update(@RequestBody @Valid ProdutoDTO produtoDTO){
         return this.produtoService.update(produtoDTO);
     }
