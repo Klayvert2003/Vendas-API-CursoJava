@@ -6,7 +6,10 @@ import com.klayvert.vendas.rest.dtos.ItemPedidoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,7 +47,7 @@ public class ItemPedidoService {
 
     public ItemPedido findById(Long id){
         return this.itemPedidoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
     }
 
     public List<ItemPedido> findByParam(ItemPedido itemPedido){

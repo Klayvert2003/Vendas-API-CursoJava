@@ -6,7 +6,9 @@ import org.springframework.data.domain.ExampleMatcher;
 import com.klayvert.vendas.domain.entities.Cliente;
 import com.klayvert.vendas.rest.dtos.ClienteDTO;
 import org.springframework.data.domain.Example;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,7 +41,7 @@ public class ClienteService {
 
     public Cliente findById(Long id){
         return this.clienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
     }
 
     public List<Cliente> findByParam(Cliente cliente){
