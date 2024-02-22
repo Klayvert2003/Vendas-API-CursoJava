@@ -7,9 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -20,9 +19,9 @@ public class PedidoDTO {
 
     private LocalDateTime dataPedido;
 
-    private float total;
+    private BigDecimal total;
 
-    private List<Cliente> cliente = new ArrayList<>();
+    private Cliente cliente;
 
     public static PedidoDTO toDto(Pedido pedido){
         PedidoDTO dto = new PedidoDTO();
@@ -30,7 +29,7 @@ public class PedidoDTO {
         dto.setId(pedido.getId());
         dto.setDataPedido(pedido.getDataPedido());
         dto.setTotal(pedido.getTotal());
-        dto.setCliente(pedido.getClientes());
+        dto.setCliente(pedido.getCliente());
 
         return dto;
     }
@@ -41,7 +40,7 @@ public class PedidoDTO {
         pedido.setId(dto.getId());
         pedido.setDataPedido(dto.getDataPedido());
         pedido.setTotal(dto.getTotal());
-        pedido.setClientes(dto.getCliente());
+        pedido.setCliente(dto.getCliente());
 
         return pedido;
     }

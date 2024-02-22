@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class ProdutoService {
-    private ProdutoRepository produtoRepository;
+    private final ProdutoRepository produtoRepository;
 
     @Autowired
     public ProdutoService(ProdutoRepository produtoRepository){
@@ -28,5 +28,19 @@ public class ProdutoService {
     public ProdutoDTO save(ProdutoDTO dto){
         Produto produto = ProdutoDTO.toObj(dto);
         return ProdutoDTO.toDto(produtoRepository.save(produto));
+    }
+
+    public void delete(Long id){
+        this.produtoRepository.delete(this.findById(id));
+    }
+
+    public ProdutoDTO update(ProdutoDTO dto){
+        Produto produto = ProdutoDTO.toObj(dto);
+        return ProdutoDTO.toDto(produtoRepository.save(produto));
+    }
+
+    public Produto findById(Long id){
+        return this.produtoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
     }
 }

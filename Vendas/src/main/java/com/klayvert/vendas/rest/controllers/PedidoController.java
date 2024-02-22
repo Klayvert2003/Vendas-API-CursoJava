@@ -4,6 +4,7 @@ import com.klayvert.vendas.rest.dtos.PedidoDTO;
 import com.klayvert.vendas.services.PedidoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,5 +29,17 @@ public class PedidoController {
     @PostMapping("/save")
     public PedidoDTO save(@RequestBody @Valid PedidoDTO pedidoDTO){
         return this.pedidoService.save(pedidoDTO);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id){
+        this.pedidoService.delete(id);
+    }
+
+    @PutMapping("/update")
+    @ResponseBody
+    public PedidoDTO update(@RequestBody @Valid PedidoDTO pedidoDTO){
+        return this.pedidoService.update(pedidoDTO);
     }
 }

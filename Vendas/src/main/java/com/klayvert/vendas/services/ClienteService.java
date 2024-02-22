@@ -7,11 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {
-    ClienteRepository clienteRepository;
+    private final ClienteRepository clienteRepository;
 
     @Autowired
     public ClienteService(ClienteRepository clienteRepository){
@@ -29,5 +30,15 @@ public class ClienteService {
         Cliente cliente = ClienteDTO.toObj(dto);
 
         return ClienteDTO.toDto(this.clienteRepository.save(cliente));
+    }
+
+    public void delete(Long id){
+        this.clienteRepository.delete(this.findById(id));
+    }
+
+
+    public Cliente findById(Long id){
+        return this.clienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
     }
 }

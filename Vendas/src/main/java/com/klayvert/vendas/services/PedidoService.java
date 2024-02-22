@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class PedidoService {
-    PedidoRepository pedidoRepository;
+    private final PedidoRepository pedidoRepository;
 
     @Autowired
     public PedidoService(PedidoRepository pedidoRepository){
@@ -29,5 +29,19 @@ public class PedidoService {
         Pedido pedido = PedidoDTO.toObj(dto);
 
         return PedidoDTO.toDto(pedidoRepository.save(pedido));
+    }
+
+    public void delete(Long id){
+        this.pedidoRepository.delete(this.findById(id));
+    }
+
+    public PedidoDTO update(PedidoDTO dto){
+        Pedido pedido = PedidoDTO.toObj(dto);
+        return PedidoDTO.toDto(pedidoRepository.save(pedido));
+    }
+
+    public Pedido findById(Long id){
+        return this.pedidoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
     }
 }

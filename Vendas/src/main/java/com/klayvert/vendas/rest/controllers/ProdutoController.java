@@ -1,5 +1,6 @@
 package com.klayvert.vendas.rest.controllers;
 
+import com.klayvert.vendas.rest.dtos.ClienteDTO;
 import com.klayvert.vendas.rest.dtos.ProdutoDTO;
 import com.klayvert.vendas.services.ProdutoService;
 import jakarta.validation.Valid;
@@ -30,5 +31,17 @@ public class ProdutoController {
     @ResponseStatus(HttpStatus.CREATED)
     public ProdutoDTO saveProducts(@RequestBody @Valid ProdutoDTO produtoDTO){
         return this.produtoService.save(produtoDTO);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id){
+        this.produtoService.delete(id);
+    }
+
+    @PutMapping("/update")
+    @ResponseBody
+    public ProdutoDTO update(@RequestBody @Valid ProdutoDTO produtoDTO){
+        return this.produtoService.update(produtoDTO);
     }
 }

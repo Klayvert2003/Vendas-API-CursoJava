@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,7 +17,7 @@ public class ProdutoDTO {
 
     private String descricao;
 
-    private float precoUnitario;
+    private BigDecimal precoUnitario;
 
     public static ProdutoDTO toDto(Produto produto){
         ProdutoDTO dto = new ProdutoDTO();
